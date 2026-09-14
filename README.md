@@ -79,8 +79,9 @@ Eliminates manual data preparation bottlenecks and removes technical friction fo
 ### 📂 Repository Structure
 
 ```text
-├── 01_bronze/         # Raw dataset ingestion notebooks & Auto Loader logic
-├── 02_silver/         # DLT pipelines, data cleaning, & expectation rules
-├── 03_gold/           # Galaxy schema modeling, Z-Ordering, & SQL views
-├── architecture/      # System architecture & ERD diagram SVGs
-└── README.md          # Project documentation
+├── 01_bronze/                           # Raw dataset ingestion notebooks & Auto Loader logic
+├── 02_silver/                           # DLT pipelines, data cleaning, & expectation rules
+├── 03_gold/                             # Galaxy schema modeling, Z-Ordering, & SQL views
+├── medallion_architecture.svg/          # System architecture
+├── cpt-utility-data-model.svg/          # ERD diagram SVG
+└── README.md                            # Project documentation
