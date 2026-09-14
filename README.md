@@ -1,20 +1,49 @@
-# cpt-utility 
+<div align="center">
 
-### 📖 Extended Project Documentation
-For full development logs, column-level data dictionaries, and architectural decision records (ADRs), explore the [CPT Utility Project Notion Workspace](https://app.notion.com/p/CPT-UTILITY-39203e73955680c18144db3039ccbc10?source=copy_link).
+  <h1>City of Cape Town Utility Analytics Lakehouse</h1>
+
+  <p>
+    <strong>End-to-End Medallion Architecture & Dimensional Analytics Platform</strong>
+  </p>
+
+  <!-- Dark Tech Stack Badges -->
+  <p>
+    <img src="https://img.shields.io/badge/Databricks-161b22?style=flat-square&logo=databricks&logoColor=FF3621" alt="Databricks" />
+    <img src="https://img.shields.io/badge/Delta_Live_Tables-161b22?style=flat-square&logo=delta&logoColor=000000" alt="DLT" />
+    <img src="https://img.shields.io/badge/PySpark-161b22?style=flat-square&logo=apachespark&logoColor=E25A1C" alt="PySpark" />
+    <img src="https://img.shields.io/badge/Power_BI-161b22?style=flat-square&logo=powerbi&logoColor=F2C811" alt="Power BI" />
+    <a href="https://app.notion.com/p/CPT-UTILITY-39203e73955680c18144db3039ccbc10?source=copy_link" target="_blank">
+      <img src="https://img.shields.io/badge/Notion_Docs-161b22?style=flat-square&logo=notion&logoColor=white" alt="Notion Workspace" />
+    </a>
+  </p>
+
+</div>
+
+---
 
 ### 🎯 Project Charter
 
-**The Mission**
+**The Mission**  
 Support the City of Cape Town’s Open Data Initiative by democratizing access to public municipal datasets, fostering operational transparency, civic innovation, and data-driven economic growth.
 
-**The Architecture**
+**The Architecture**  
 An end-to-end ELT Medallion Lakehouse pipeline on Databricks that ingests, cleans, and structures public municipal records into:
 * **8 Silver Datasets:** Cleaned, deduplicated, and governed via Delta Live Tables (DLT) expectation rules.
 * **Gold Galaxy Schema:** 6 enriched, conformed dimensions sharing 8 multi-fact tables tailored for complex municipal metrics.
 
-**The Impact**
-Eliminates manual data preparation bottlenecks and removes technical friction for analysts and city stakeholders, delivering high-performance, low-latency DirectQuery reporting in Power BI or Tableu.
+**The Impact**  
+Eliminates manual data preparation bottlenecks and removes technical friction for analysts and city stakeholders, delivering high-performance, low-latency DirectQuery reporting in Power BI.
+
+---
+
+### 🏗️ System Architecture
+
+<div align="center">
+  <img src="medallion_architecture.svg" alt="City of Cape Town Lakehouse Architecture" width="100%" />
+  <p><em>Figure 1: End-to-End Medallion Lakehouse pipeline from City of Cape Town Open Data landing zone to Power BI DirectQuery.</em></p>
+</div>
+
+---
 
 ### 📂 Ingested Open Data Datasets
 
@@ -36,12 +65,7 @@ Eliminates manual data preparation bottlenecks and removes technical friction fo
 **Water Resources & Climate**
 * **Cape Town Dam Levels** (`2000–2026`) — Long-term historical water storage levels and capacity percentages.
 
-### 🏗️ System Architecture
-
-<div align="center">
-  <img src="medallion_architecture.svg" alt="City of Cape Town Lakehouse Architecture" width="100%" />
-  <p><em>Figure 1: End-to-End Medallion Lakehouse pipeline from City of Cape Town Open Data landing zone to Power BI or Tableau.</em></p>
-</div>
+---
 
 ### 📐 Data Model (Galaxy Schema)
 
@@ -50,4 +74,13 @@ Eliminates manual data preparation bottlenecks and removes technical friction fo
   <p><em>Figure 2: Multi-fact Galaxy Schema consisting of 6 conformed dimensions and 8 fact tables for municipal reporting.</em></p>
 </div>
 
+---
 
+### 📂 Repository Structure
+
+```text
+├── 01_bronze/         # Raw dataset ingestion notebooks & Auto Loader logic
+├── 02_silver/         # DLT pipelines, data cleaning, & expectation rules
+├── 03_gold/           # Galaxy schema modeling, Z-Ordering, & SQL views
+├── architecture/      # System architecture & ERD diagram SVGs
+└── README.md          # Project documentation
