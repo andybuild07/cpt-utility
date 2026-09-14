@@ -1,4 +1,7 @@
-# cpt-utility
+# cpt-utility 
+
+### 📖 Extended Project Documentation
+For full development logs, column-level data dictionaries, and architectural decision records (ADRs), explore the [CPT Utility Project Notion Workspace](https://app.notion.com/p/CPT-UTILITY-39203e73955680c18144db3039ccbc10?source=copy_link).
 
 ### 🎯 Project Charter
 
@@ -37,7 +40,7 @@ Eliminates manual data preparation bottlenecks and removes technical friction fo
 
 <div align="center">
   <img src="medallion_architecture.svg" alt="City of Cape Town Lakehouse Architecture" width="100%" />
-  <p><em>Figure 1: End-to-End Medallion Lakehouse pipeline from City of Cape Town Open Data landing zone to Power BI or Tableu.</em></p>
+  <p><em>Figure 1: End-to-End Medallion Lakehouse pipeline from City of Cape Town Open Data landing zone to Power BI or Tableau.</em></p>
 </div>
 
 ### 📐 Data Model (Galaxy Schema)
