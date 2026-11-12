@@ -1,0 +1,167 @@
+resources:
+  jobs:
+    cpt_utility_lakehouse_pipeline:
+      name: cpt_utility_lakehouse_pipeline
+      tasks:
+        - task_key: 01_bronze_ingest
+          notebook_task:
+            notebook_path: /Workspace/Users/andybuild07@gmail.com/cpt-utility/01_bronze/ingestion
+            source: WORKSPACE
+        - task_key: 02_silver_transform_cpi
+          depends_on:
+            - task_key: 01_bronze_ingest
+          notebook_task:
+            notebook_path: /Workspace/Users/andybuild07@gmail.com/cpt-utility/02_silver/cpi
+            source: WORKSPACE
+        - task_key: 02_silver_transform_dam_levels
+          depends_on:
+            - task_key: 01_bronze_ingest
+          notebook_task:
+            notebook_path: /Workspace/Users/andybuild07@gmail.com/cpt-utility/02_silver/dam_levels
+            source: WORKSPACE
+        - task_key: 02_silver_transform_electricity_billing
+          depends_on:
+            - task_key: 01_bronze_ingest
+          notebook_task:
+            notebook_path: /Workspace/Users/andybuild07@gmail.com/cpt-utility/02_silver/suburb_electricity_billing
+            source: WORKSPACE
+        - task_key: 02_silver_transform_service_requests
+          depends_on:
+            - task_key: 01_bronze_ingest
+          notebook_task:
+            notebook_path: /Workspace/Users/andybuild07@gmail.com/cpt-utility/02_silver/service_requests
+            source: WORKSPACE
+        - task_key: 02_silver_transform_subcouncil_arrears
+          depends_on:
+            - task_key: 01_bronze_ingest
+          notebook_task:
+            notebook_path: /Workspace/Users/andybuild07@gmail.com/cpt-utility/02_silver/subcouncil_arrears
+            source: WORKSPACE
+        - task_key: 02_silver_transform_substations
+          depends_on:
+            - task_key: 01_bronze_ingest
+          notebook_task:
+            notebook_path: /Workspace/Users/andybuild07@gmail.com/cpt-utility/02_silver/load_profiles
+            source: WORKSPACE
+        - task_key: 02_silver_transform_suburb_arrears
+          depends_on:
+            - task_key: 01_bronze_ingest
+          notebook_task:
+            notebook_path: /Workspace/Users/andybuild07@gmail.com/cpt-utility/02_silver/suburb_arrears
+            source: WORKSPACE
+        - task_key: 02_silver_transform_water_billing
+          depends_on:
+            - task_key: 01_bronze_ingest
+          notebook_task:
+            notebook_path: /Workspace/Users/andybuild07@gmail.com/cpt-utility/02_silver/suburb_water_billing
+            source: WORKSPACE
+        - task_key: 03_gold_dim_dam
+          depends_on:
+            - task_key: 02_silver_transform_dam_levels
+          notebook_task:
+            notebook_path: /Workspace/Users/andybuild07@gmail.com/cpt-utility/03_gold/01_dimensions/dim_dam
+            source: WORKSPACE
+        - task_key: 03_gold_dim_date
+          notebook_task:
+            notebook_path: /Workspace/Users/andybuild07@gmail.com/cpt-utility/03_gold/01_dimensions/dim_date
+            source: WORKSPACE
+        - task_key: 03_gold_dim_geonational
+          depends_on:
+            - task_key: 02_silver_transform_cpi
+          notebook_task:
+            notebook_path: /Workspace/Users/andybuild07@gmail.com/cpt-utility/03_gold/01_dimensions/dim_geonational
+            source: WORKSPACE
+        - task_key: 03_gold_dim_product
+          depends_on:
+            - task_key: 02_silver_transform_cpi
+          notebook_task:
+            notebook_path: /Workspace/Users/andybuild07@gmail.com/cpt-utility/03_gold/01_dimensions/dim_product
+            source: WORKSPACE
+        - task_key: 03_gold_dim_substation
+          depends_on:
+            - task_key: 02_silver_transform_substations
+          notebook_task:
+            notebook_path: /Workspace/Users/andybuild07@gmail.com/cpt-utility/03_gold/01_dimensions/dim_substation
+            source: WORKSPACE
+        - task_key: 03_gold_dim_suburb
+          depends_on:
+            - task_key: 02_silver_transform_suburb_arrears
+            - task_key: 02_silver_transform_service_requests
+          notebook_task:
+            notebook_path: /Workspace/Users/andybuild07@gmail.com/cpt-utility/03_gold/01_dimensions/dim_suburb
+            source: WORKSPACE
+        - task_key: 03_gold_fct_arrears_subcouncil
+          depends_on:
+            - task_key: 03_gold_dim_date
+            - task_key: 02_silver_transform_subcouncil_arrears
+          notebook_task:
+            notebook_path: /Workspace/Users/andybuild07@gmail.com/cpt-utility/03_gold/02_facts/fct_arrears_subcouncil
+            source: WORKSPACE
+        - task_key: 03_gold_fct_arrears_suburb
+          depends_on:
+            - task_key: 03_gold_dim_date
+            - task_key: 03_gold_dim_suburb
+            - task_key: 02_silver_transform_suburb_arrears
+          notebook_task:
+            notebook_path: /Workspace/Users/andybuild07@gmail.com/cpt-utility/03_gold/02_facts/fct_arrears_suburb
+            source: WORKSPACE
+        - task_key: 03_gold_fct_cpi
+          depends_on:
+            - task_key: 03_gold_dim_date
+            - task_key: 03_gold_dim_geonational
+            - task_key: 03_gold_dim_product
+            - task_key: 02_silver_transform_cpi
+          notebook_task:
+            notebook_path: /Workspace/Users/andybuild07@gmail.com/cpt-utility/03_gold/02_facts/fct_cpi
+            source: WORKSPACE
+        - task_key: 03_gold_fct_dam_levels
+          depends_on:
+            - task_key: 03_gold_dim_date
+            - task_key: 03_gold_dim_dam
+            - task_key: 02_silver_transform_dam_levels
+          notebook_task:
+            notebook_path: /Workspace/Users/andybuild07@gmail.com/cpt-utility/03_gold/02_facts/fct_dam_levels
+            source: WORKSPACE
+        - task_key: 03_gold_fct_service_requests
+          depends_on:
+            - task_key: 03_gold_dim_suburb
+            - task_key: 03_gold_dim_date
+            - task_key: 02_silver_transform_service_requests
+          notebook_task:
+            notebook_path: /Workspace/Users/andybuild07@gmail.com/cpt-utility/03_gold/02_facts/fct_service_requests
+            source: WORKSPACE
+        - task_key: 03_gold_fct_substation_daily
+          depends_on:
+            - task_key: 03_gold_dim_date
+            - task_key: 03_gold_dim_substation
+            - task_key: 02_silver_transform_substations
+          notebook_task:
+            notebook_path: /Workspace/Users/andybuild07@gmail.com/cpt-utility/03_gold/02_facts/fct_substation_daily
+            source: WORKSPACE
+        - task_key: 03_gold_fct_suburb_electricity_billing
+          depends_on:
+            - task_key: 03_gold_dim_suburb
+            - task_key: 03_gold_dim_date
+            - task_key: 02_silver_transform_electricity_billing
+          notebook_task:
+            notebook_path: /Workspace/Users/andybuild07@gmail.com/cpt-utility/03_gold/02_facts/fct_suburb_electricity_billing
+            source: WORKSPACE
+        - task_key: 03_gold_fct_suburb_water_billing
+          depends_on:
+            - task_key: 03_gold_dim_date
+            - task_key: 03_gold_dim_suburb
+            - task_key: 02_silver_transform_water_billing
+          notebook_task:
+            notebook_path: /Workspace/Users/andybuild07@gmail.com/cpt-utility/03_gold/02_facts/fct_suburb_water_billing
+            source: WORKSPACE
+      git_source:
+        git_url: https://github.com/andybuild07/cpt-utility
+        git_provider: gitHub
+        git_branch: main
+      queue:
+        enabled: true
+      environments:
+        - environment_key: Default
+          spec:
+            environment_version: "5"
+      performance_target: PERFORMANCE_OPTIMIZED
