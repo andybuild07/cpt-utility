@@ -39,7 +39,7 @@ Eliminates manual data preparation bottlenecks and removes technical friction fo
 ### 🏗️ System Architecture
 
 <div align="center">
-  <img src="medallion_architecture.svg" alt="City of Cape Town Lakehouse Architecture" width="100%" />
+  <img src="docs/medallion_architecture.svg" alt="City of Cape Town Lakehouse Architecture" width="100%" />
   <p><em>Figure 1: End-to-End Medallion Lakehouse pipeline from City of Cape Town Open Data landing zone to Power BI DirectQuery.</em></p>
 </div>
 
@@ -70,7 +70,7 @@ Eliminates manual data preparation bottlenecks and removes technical friction fo
 ### 📐 Data Model (Galaxy Schema)
 
 <div align="center">
-  <img src="cpt-utility-data-model.svg" alt="Galaxy Schema Entity Relationship Diagram" width="100%" />
+  <img src="docs/cpt-utility-data-model.svg" alt="Galaxy Schema Entity Relationship Diagram" width="100%" />
   <p><em>Figure 2: Multi-fact Galaxy Schema consisting of 6 conformed dimensions and 8 fact tables for municipal reporting.</em></p>
 </div>
 
@@ -79,9 +79,7 @@ Eliminates manual data preparation bottlenecks and removes technical friction fo
 ### 📂 Repository Structure
 
 ```text
-├── 01_bronze/                           # Raw dataset ingestion notebooks & Auto Loader logic
-├── 02_silver/                           # DLT pipelines, data cleaning, & expectation rules
-├── 03_gold/                             # Galaxy schema modeling, Z-Ordering, & SQL views
-├── medallion_architecture.svg/          # System architecture
-├── cpt-utility-data-model.svg/          # ERD diagram SVG
+├── docs/                                # architecture and data modelling erd diagram
+├── src/                                 #lakehouse notebooks from bronze to gold and export script
+├── resources/                           # databricks yml config with resource allocation and orchestration workflow
 └── README.md                            # Project documentation
