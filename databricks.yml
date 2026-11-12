@@ -1,0 +1,11 @@
+bundle:
+  name: cpt-utility
+
+include:
+  - resources/*.yml
+
+targets:
+  default:
+    default: true
+    workspace:
+      host: https://dbc-03a17737-57b4.cloud.databricks.com
