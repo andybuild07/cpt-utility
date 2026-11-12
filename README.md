@@ -81,5 +81,5 @@ Eliminates manual data preparation bottlenecks and removes technical friction fo
 ```text
 ├── docs/                                # architecture and data modelling erd diagram
 ├── src/                                 #lakehouse notebooks from bronze to gold and export script
-├── resources/                           # databricks yml config with resource allocation and orchestration workflow
+├── resources/                           # databricks yml orchestration workflow
 └── README.md                            # Project documentation
